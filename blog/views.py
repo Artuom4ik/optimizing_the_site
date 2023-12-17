@@ -8,7 +8,7 @@ def get_related_posts_count(tag):
 
 
 def get_likes_count(post):
-    return {'post': post, 'like_count': post.like_count}
+    return post.likes_count
 
 
 def serialize_post_optimized(post):
