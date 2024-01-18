@@ -48,7 +48,7 @@ def serialize_tag(tag):
 
 
 def index(request):
-    posts = Post.objects.prefetch_related('author')
+    posts = Post.objects.prefetch_related('author').prefetch_related('tags')
 
     fresh_posts = posts.order_by('-published_at')
     most_fresh_posts = fresh_posts.fetch_with_comments_count()[:5:]
@@ -69,7 +69,7 @@ def index(request):
 
 
 def post_detail(request, slug):
-    post = Post.objects.prefetch_related('author').get(slug=slug)
+    post = Post.objects.prefetch_related('author').prefetch_related('tags').get(slug=slug)
     serialized_comments = []
     for comment in post.comments.all():
         serialized_comments.append({
