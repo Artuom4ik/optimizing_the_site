@@ -4,14 +4,6 @@ from django.db.models import Count
 from blog.models import Comment, Post, Tag
 
 
-def get_likes_count(post):
-    return post.likes_count
-
-
-def get_related_posts_count(tag):
-    return tag.posts.count()
-
-
 def serialize_post_optimized(post):
     return {
         'title': post.title,
@@ -87,7 +79,7 @@ def post_detail(request, slug):
         'text': post.text,
         'author': post.author.username,
         'comments': serialized_comments,
-        'likes_amount': len(likes),
+        'likes_amount': likes.count(),
         'image_url': post.image.url if post.image else None,
         'published_at': post.published_at,
         'slug': post.slug,
