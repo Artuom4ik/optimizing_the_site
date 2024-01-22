@@ -12,12 +12,10 @@ class PostAdmin(admin.ModelAdmin):
     ]
 
 
-@admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('post', 'text',)
     raw_id_fields = ['post', 'author']
+
+
+admin.site.register(Tag)
